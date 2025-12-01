@@ -1,0 +1,252 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #f9f9f9;
+}
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px;
+    font-family: "Roboto", serif;
+}
+
+.nav-left .logo {
+    height: 40px;
+}
+
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+}
+
+.nav-center a,
+.nav-right a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.nav-right a:hover {
+    color: #7b0000;
+}
+
+.nav-center a:hover {
+    color: #7b0000;
+}
+
+.main-profile-section {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 50px;
+    margin-right: 90px;
+    margin-left: 90px;
+}
+
+.profile-container {
+    width: 850px;
+}
+
+.extra-box {
+    flex: 1;
+    background-color: maroon;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 2px rgba(71, 71, 71, 0.2);
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    display: flex; /* Flexbox for centering */
+    align-items: center; /* Vertical center */
+    justify-content: center;
+    height: 220px;
+    flex-direction: column;
+}
+
+.extra-box-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+
+h1, h3 {
+    margin: 0; 
+    padding: 0; 
+}
+
+h1 {
+    font-family: "Poppins", sans-serif;
+    color: maroon;
+    text-align: left;
+    font-size: 30px;
+}
+
+.grid-container2 {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 220px;
+    padding: 10px;
+    padding-right: 50px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 2px rgba(71, 71, 71, 0.2);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.profile-name h3 {
+    font-family: "Poppins", sans-serif;
+    color: black;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-right: 20px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 2px rgba(71, 71, 71, 0.2);
+    object-fit: cover;
+}
+
+.dept_img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 2px rgba(71, 71, 71, 0.2);
+    object-fit: cover;
+}
+
+/* From Uiverse.io by vinodjangid07 */ 
+.button {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: maroon;
+  border-radius: 50%;
+  cursor: pointer;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
+  border: none;
+}
+
+.bell {
+  width: 18px;
+}
+
+.bell path {
+  fill: white;
+}
+
+.button:hover {
+  background-color: rgb(105, 104, 104);
+}
+
+.button:hover .bell {
+  animation: bellRing 0.9s both;
+}
+
+/* bell ringing animation keyframes*/
+@keyframes bellRing {
+  0%,
+  100% {
+    transform-origin: top;
+  }
+
+  15% {
+    transform: rotateZ(10deg);
+  }
+
+  30% {
+    transform: rotateZ(-10deg);
+  }
+
+  45% {
+    transform: rotateZ(5deg);
+  }
+
+  60% {
+    transform: rotateZ(-5deg);
+  }
+
+  75% {
+    transform: rotateZ(2deg);
+  }
+}
+
+.button:active {
+  transform: scale(0.8);
+}
+
+.notif-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: white;
+    color: maroon;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px 6px;
+    text-align: center;
+}
+
+.notif-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 320px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+    transition: all 0.2s ease-in-out;
+}
+
+.notif-header {
+    font-weight: bold;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f9fa;
+}
+
+.notif-list a {
+    display: block;
+    padding: 10px 12px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #eee;
+}
+
+.notif-list a:hover {
+    background: #f1f1f1;
+}
+
+.notif-list small {
+    color: #999;
+}
+
+.list-group-item-warning {
+    background-color: #fff8e1;
+}
