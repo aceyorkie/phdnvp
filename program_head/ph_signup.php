@@ -107,6 +107,11 @@
                 <option value="Department of Technical Programs">Department of Technical Programs</option>
                 <option value="Senior High School">Senior High School</option>
             </select>
+
+            <label for="course">Course:</label>
+            <select name="course" id="course" required>
+                <option value="">Select Course</option>
+            </select>
             
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" required>
@@ -114,5 +119,66 @@
             <input type="submit" value="Sign Up">
         </form>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const departmentCourses = {
+                "Department of Technical Programs": [
+                    "BS IN INFORMATION TECHNOLOGY",
+                    "BS IN COMPUTER ENGINEERING"
+                ],
+                "Department of Accounting Education": [
+                    "BS IN ACCOUNTANCY",
+                    "BS IN INTERNAL AUDITING",
+                    "BS IN MANAGEMENT ACCOUNTING"
+                ],
+                "Department of Art and Sciences": [
+                    "BS IN PSYCHOLOGY",
+                    "BS IN SOCIAL WORK",
+                    "BA IN POLITICAL SCIENCE",
+                    "BA IN COMMUNICATION"
+                ],
+                "Department of Business Administration": [
+                    "BS IN BUSINESS ADMINISTRATION - FINANCIAL MANAGEMENT",
+                    "BS IN BUSINESS ADMINISTRATION - HUMAN RESOURCE MANAGEMENT",
+                    "BS IN BUSINESS ADMINISTRATION - MARKETING MANAGEMENT"
+                ],
+                "Department of Hospitality Education": [
+                    "BS IN TOURISM MANAGEMENT"
+                ],
+                "Department of Criminal Justice Education": [
+                    "BS IN CRIMINOLOGY"
+                ],
+                "Department of Teachers Education":[
+                    "BACHELOR IN ELEMENTARY EDUCATION",
+                    "BACHELOR IN SPECIAL NEEDS EDUCATION MAJOR IN ELEMENTARY SCHOOL TEACHING",
+                    "BACHELOR OF PHYSICAL EDUCATION",
+                    "BACHELOR OF SECONDARY EDUCATION - SCIENCE",
+                    "BACHELOR OF SECONDARY EDUCATION - ENGLISH",
+                    "BACHELOR OF SECONDARY EDUCATION - FILIPINO",
+                    "BACHELOR OF SECONDARY EDUCATION - SOCIAL STUDIES",
+                    "BACHELOR OF SECONDARY EDUCATION - MATHEMATICS",
+                    "BACHELOR OF TECHNICAL VOCATIONAL TEACHER EDUCATION - FOOD SERVICE",
+                    "BACHELOR OF TECHNICAL VOCATIONAL TEACHER EDUCATION - AUTOMOTIVE TECHNOLOGY"
+                ]
+            };
+            document.getElementById("department").addEventListener("change", function() {
+                const dept = this.value;
+                const courseDropdown = document.getElementById("course");
+
+                courseDropdown.innerHTML = '<option value="">Select Course</option>';
+
+                if (departmentCourses[dept]) {
+                    departmentCourses[dept].forEach(course => {
+                        let opt = document.createElement("option");
+                        opt.value = course;
+                        opt.textContent = course;
+                        courseDropdown.appendChild(opt);
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

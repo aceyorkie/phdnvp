@@ -85,9 +85,6 @@ if (isset($_FILES['final_pdf']) && $_FILES['final_pdf']['error'] === UPLOAD_ERR_
     }
 }
 
-/* ---------------------------------------------------------
-   UPDATE ONLY THE CURRENT SIGNATORY — NO NEXT ROLE
---------------------------------------------------------- */
 $now = date("Y-m-d H:i:s");
 
 $stmt = $conn->prepare("
@@ -95,6 +92,46 @@ $stmt = $conn->prepare("
     SET signed_at = ?, status = 'signed'
     WHERE request_id = ? AND role = ? AND event_id = ?
 ");
+
+// ---------------------------------------------------------
+// CHECK IF THIS WAS THE LAST SIGNATORY
+// ---------------------------------------------------------
+$check = $conn->prepare("
+    SELECT COUNT(*) 
+    FROM event_signature_flow
+    WHERE request_id = ? AND event_id = ? AND status != 'signed'
+");
+$check->bind_param("ii", $request_id, $event_id);
+$check->execute();
+$check->bind_result($remaining);
+$check->fetch();
+$check->close();
+
+// If no remaining unsigned signatories → complete event
+if ($remaining == 0) {
+
+    // Try updating organizational_events
+    $updateOrg = $conn->prepare("
+        UPDATE orgportal.organizational_events 
+        SET status = 'approved' 
+        WHERE event_id = ?
+    ");
+    $updateOrg->bind_param("i", $event_id);
+    $updateOrg->execute();
+
+    // Try updating institutional_events
+    $updateInst = $conn->prepare("
+        UPDATE orgportal.institutional_events 
+        SET status = 'approved' 
+        WHERE event_id = ?
+    ");
+    $updateInst->bind_param("i", $event_id);
+    $updateInst->execute();
+
+    // OPTIONAL: Log what table updated
+    error_log("Event $event_id status updated to approved.");
+}
+
 
 if (!$stmt) {
     echo json_encode(['status' => 'error', 'message' => 'Prepare failed: ' . $conn->error]);
@@ -104,10 +141,6 @@ if (!$stmt) {
 $stmt->bind_param("sisi", $now, $request_id, $role, $event_id);
 $stmt->execute();
 $stmt->close();
-
-/* ---------------------------------------------------------
-   ✔ NO next signatory activation at all
---------------------------------------------------------- */
 
 echo json_encode(['status' => 'success', 'message' => 'Documents submitted successfully']);
 $conn->close();

@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $row['password'])) {
             $_SESSION['id_no'] = $row['id_no'];
 
-            header("Location: dean_home.php");
+            header("Location: /osaDashboard/Osa.php");
             exit();
         } else {
             echo "Invalid password.";

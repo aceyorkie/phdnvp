@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_no = $_POST['id_no'];
     $name = $_POST['name'];
     $department = $_POST['department'];
+    $course = $_POST['course'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     $check_query = $conn->prepare("SELECT id_no FROM programhead WHERE id_no=?");
@@ -29,8 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         echo "ID No. already exists.";
     } else {
-        $sql = $conn->prepare("INSERT INTO programhead (id_no, name, password, department) VALUES (?, ?, ?, ?)");
-        $sql->bind_param("ssss", $id_no, $name, $password, $department);
+        $sql = $conn->prepare("INSERT INTO programhead (id_no, name, password, department, course) VALUES (?, ?, ?, ?, ?)");
+        $sql->bind_param("sssss", $id_no, $name, $password, $department, $course);
 
         if ($sql->execute()) {
             $_SESSION['id_no'] = $id_no;

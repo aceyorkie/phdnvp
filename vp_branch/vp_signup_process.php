@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($sql->execute()) {
             $_SESSION['id_no'] = $id_no;
             $_SESSION['name'] = $name;
-            header("Location: vp_home.php");
+            header("Location: /osaDashboard/Osa.php");
             exit();
         } else {
             echo "Error: " . $conn->error;
